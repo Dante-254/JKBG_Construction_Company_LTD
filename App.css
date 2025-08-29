@@ -20,15 +20,16 @@ body {
 
 nav button {
   background: transparent !important;
-  color: #222 !important;
+  color: #1a1a1a !important;
   border: none;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.08rem;
   padding: 8px 16px;
   cursor: pointer;
   position: relative;
   transition: color 0.2s;
   outline: none;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 nav button::after {
   content: '';

@@ -1,45 +1,82 @@
 import { useState } from 'react';
 import Home from './pages/Home';
 import About from './pages/About';
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [view, setView] = useState<'home' | 'about'>('home');
 
+  // Scroll to services section in Home page
+  const handleServicesClick = () => {
+    setView('home');
+    setTimeout(() => {
+      const servicesSection = document.getElementById('services');
+      if (servicesSection) {
+        servicesSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <div>
-      <header style={{ background: '#282c34', padding: '10px 0', marginBottom: 20, position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 100 }}>
-        <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ position: 'relative', display: 'inline-block', marginRight: 10 }}>
-            <button 
-              className="home-btn"
-              onClick={() => setView('home')}
-            >
-              Home
-            </button>
-            <button 
-              className="service-link-btn"
-              onClick={() => setView('home')}
-            >
-              Services
-            </button>
-          </div>
-          <button 
-            onClick={() => setView('about')} 
-            style={{ padding: '8px 16px', borderRadius: 4, border: 'none', background: '#61dafb', color: '#282c34', fontWeight: 'bold', cursor: 'pointer' }}
+      <header style={{ background: '#fff', padding: '10px 0', marginBottom: 20, position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 100, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+        <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10 }}>
+          <button
+            onClick={() => setView('home')}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#222',
+              fontWeight: 600,
+              fontSize: '1.1rem',
+              cursor: 'pointer',
+              padding: '8px 16px',
+              transition: 'color 0.2s, border-bottom 0.2s',
+              borderBottom: view === 'home' ? '2px solid #222' : '2px solid transparent',
+            }}
+          >
+            Home
+          </button>
+          <button
+            onClick={handleServicesClick}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#222',
+              fontWeight: 600,
+              fontSize: '1.1rem',
+              cursor: 'pointer',
+              padding: '8px 16px',
+              transition: 'color 0.2s, border-bottom 0.2s',
+              borderBottom: view === 'home' ? '2px solid #222' : '2px solid transparent',
+            }}
+          >
+            Services
+          </button>
+          <button
+            onClick={() => setView('about')}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#222',
+              fontWeight: 600,
+              fontSize: '1.1rem',
+              cursor: 'pointer',
+              padding: '8px 16px',
+              transition: 'color 0.2s, border-bottom 0.2s',
+              borderBottom: view === 'about' ? '2px solid #222' : '2px solid transparent',
+            }}
           >
             About
           </button>
         </nav>
       </header>
-      <div style={{ margin: '70px 10px 10px 10px' }}>
+      <main style={{ paddingTop: 80 }}>
         {view === 'home' && <Home />}
         {view === 'about' && <About />}
-      </div>
+      </main>
     </div>
   );
 }
 
-export default App
+export default App;
