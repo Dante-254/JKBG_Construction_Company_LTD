@@ -3,6 +3,72 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+  background: #f7f7fa;
+}
+body {
+  background: #f7f7fa;
+  color: #222;
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  background: #fff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+nav button {
+  background: transparent !important;
+  color: #222 !important;
+  border: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px 16px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  outline: none;
+}
+nav button::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #282c34;
+  transition: width 0.2s;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+nav button:hover {
+  color: #282c34 !important;
+}
+nav button:hover::after {
+  width: 100%;
+}
+
+.service-link-btn {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 110%;
+  background: #e0e7ff;
+  color: #222;
+  border-radius: 4px;
+  padding: 6px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  font-size: 1rem;
+  font-weight: 500;
+  z-index: 10;
+  border: 1px solid #d1d5db;
+}
+nav .home-btn:hover + .service-link-btn {
+  display: block;
+}
+}
+nav button:hover {
+  background: #c7d2fe !important;
 }
 
 .logo {
