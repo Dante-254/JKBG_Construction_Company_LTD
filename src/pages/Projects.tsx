@@ -1,170 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export const initialProjects = [
-  {
-    id: 1,
-    title: "Modern Apartment Complex",
-    description: "A luxury apartment complex in Nairobi.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 2,
-    title: "Office Tower",
-    description: "A state-of-the-art office tower in the CBD.",
-    status: "Sold",
-    image:
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 3,
-    title: "Luxury Villas",
-    description: "Exclusive villas with private gardens.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 4,
-    title: "Shopping Mall",
-    description: "A modern shopping mall with entertainment facilities.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 5,
-    title: "Beach Resort",
-    description: "A beautiful resort on the Kenyan coast.",
-    status: "Sold",
-    image:
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 6,
-    title: "Golf Course Estate",
-    description: "Premium estate with golf course views.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 7,
-    title: "Tech Park",
-    description: "A hub for technology companies.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1465101178521-c1a4c8a0a0d9?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 8,
-    title: "Hospital Complex",
-    description: "State-of-the-art medical facilities.",
-    status: "Sold",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 9,
-    title: "School Campus",
-    description: "Modern school campus for all ages.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 10,
-    title: "Conference Center",
-    description: "Large conference and event center.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 11,
-    title: "Warehouse Facility",
-    description: "Secure warehouse for logistics.",
-    status: "Sold",
-    image:
-      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 12,
-    title: "Residential Estate",
-    description: "Family-friendly residential estate.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 13,
-    title: "Business Center",
-    description: "Offices and meeting rooms for businesses.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 14,
-    title: "Sports Complex",
-    description: "Facilities for multiple sports.",
-    status: "Sold",
-    image:
-      "https://images.unsplash.com/photo-1465101178521-c1a4c8a0a0d9?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 15,
-    title: "Retirement Village",
-    description: "Comfortable living for seniors.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 16,
-    title: "Eco Homes",
-    description: "Sustainable eco-friendly homes.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 17,
-    title: "City Hotel",
-    description: "Luxury hotel in the city center.",
-    status: "Sold",
-    image:
-      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 18,
-    title: "Lakeview Apartments",
-    description: "Apartments with stunning lake views.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 19,
-    title: "Mountain Retreat",
-    description: "Peaceful retreat in the mountains.",
-    status: "Available",
-    image:
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 20,
-    title: "Urban Lofts",
-    description: "Trendy loft apartments in the city.",
-    status: "Sold",
-    image:
-      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80",
-  },
-];
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+  image: string;
+};
 
-function Projects() {
-  const [projects, setProjects] = useState(initialProjects);
+type ProjectsProps = {
+  isOwner?: boolean;
+};
+
+function Projects({ isOwner = false }: ProjectsProps) {
+  const [projects, setProjects] = useState<Project[]>([]);
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -172,6 +21,24 @@ function Projects() {
     image: "",
   });
   const [showForm, setShowForm] = useState(false);
+  const [superUser, setSuperUser] = useState<string>("");
+  const [loginForm, setLoginForm] = useState({ username: "", password: "" });
+  const [loginError, setLoginError] = useState("");
+  const [showRegister, setShowRegister] = useState(false);
+  const [registerForm, setRegisterForm] = useState({
+    username: "",
+    password: "",
+  });
+  const [registerError, setRegisterError] = useState("");
+  const [registerSuccess, setRegisterSuccess] = useState("");
+
+  // Fetch projects from backend API
+  useEffect(() => {
+    fetch("http://localhost:4000/api/projects")
+      .then((res) => res.json())
+      .then((data) => setProjects(data))
+      .catch((err) => console.error("Failed to fetch projects:", err));
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -194,11 +61,58 @@ function Projects() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Superuser login
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setProjects([...projects, { id: Date.now(), ...form }]);
-    setForm({ title: "", description: "", status: "Available", image: "" });
-    setShowForm(false);
+    setLoginError("");
+    const res = await fetch("/api/superusers/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(loginForm),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setSuperUser(loginForm.username);
+      setLoginForm({ username: "", password: "" });
+    } else {
+      setLoginError(data.error || "Login failed");
+    }
+  };
+
+  // Superuser registration
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setRegisterError("");
+    setRegisterSuccess("");
+    const res = await fetch("/api/superusers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(registerForm),
+    });
+    const data = await res.json();
+    if (res.ok && data.id) {
+      setRegisterSuccess("Superuser profile created! You can now log in.");
+      setRegisterForm({ username: "", password: "" });
+    } else {
+      setRegisterError(data.error || "Registration failed");
+    }
+  };
+
+  // Add project (only if superUser is set)
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!superUser) return;
+    const res = await fetch("/api/projects", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...form, username: superUser }),
+    });
+    if (res.ok) {
+      const newProject = await res.json();
+      setProjects([...projects, newProject]);
+      setForm({ title: "", description: "", status: "Available", image: "" });
+      setShowForm(false);
+    }
   };
 
   return (
@@ -214,90 +128,276 @@ function Projects() {
       <h2 style={{ color: "#111", marginBottom: 18, fontWeight: 700 }}>
         Projects
       </h2>
-      <button
-        style={{
-          marginBottom: 20,
-          padding: "8px 16px",
-          fontWeight: 600,
-          background: "#e0e7ff",
-          border: "none",
-          borderRadius: 4,
-          cursor: "pointer",
-          color: "#222",
-        }}
-        onClick={() => setShowForm(!showForm)}
-      >
-        {showForm ? "Cancel" : "Add New Project"}
-      </button>
-      {showForm && (
-        <form onSubmit={handleSubmit} style={{ marginBottom: 24 }}>
-          <input
-            name="title"
-            value={form.title}
-            onChange={handleChange}
-            placeholder="Project Title"
-            required
+      {!superUser ? (
+        <>
+          {showRegister ? (
+            <form onSubmit={handleRegister} style={{ marginBottom: 24 }}>
+              <input
+                name="username"
+                value={registerForm.username}
+                onChange={(e) =>
+                  setRegisterForm({
+                    ...registerForm,
+                    username: e.target.value,
+                  })
+                }
+                placeholder="Choose a username"
+                required
+                style={{
+                  display: "block",
+                  marginBottom: 10,
+                  padding: 8,
+                  width: "100%",
+                  borderRadius: 4,
+                  border: "1px solid #d1d5db",
+                }}
+              />
+              <input
+                name="password"
+                type="password"
+                value={registerForm.password}
+                onChange={(e) =>
+                  setRegisterForm({
+                    ...registerForm,
+                    password: e.target.value,
+                  })
+                }
+                placeholder="Choose a password"
+                required
+                style={{
+                  display: "block",
+                  marginBottom: 10,
+                  padding: 8,
+                  width: "100%",
+                  borderRadius: 4,
+                  border: "1px solid #d1d5db",
+                }}
+              />
+              <button
+                type="submit"
+                style={{
+                  padding: "8px 16px",
+                  fontWeight: 600,
+                  background: "#d1fae5",
+                  border: "none",
+                  borderRadius: 4,
+                  cursor: "pointer",
+                  color: "#065f46",
+                }}
+              >
+                Create Superuser Profile
+              </button>
+              <button
+                type="button"
+                style={{
+                  marginLeft: 8,
+                  padding: "6px 16px",
+                  background: "#e0e7ff",
+                  border: "none",
+                  borderRadius: 4,
+                  cursor: "pointer",
+                  color: "#222",
+                }}
+                onClick={() => setShowRegister(false)}
+              >
+                Cancel
+              </button>
+              {registerError && (
+                <div style={{ color: "#991b1b", marginTop: 8 }}>
+                  {registerError}
+                </div>
+              )}
+              {registerSuccess && (
+                <div style={{ color: "#065f46", marginTop: 8 }}>
+                  {registerSuccess}
+                </div>
+              )}
+            </form>
+          ) : (
+            <>
+              <form onSubmit={handleLogin} style={{ marginBottom: 24 }}>
+                <input
+                  name="username"
+                  value={loginForm.username}
+                  onChange={(e) =>
+                    setLoginForm({ ...loginForm, username: e.target.value })
+                  }
+                  placeholder="Superuser Username"
+                  required
+                  style={{
+                    display: "block",
+                    marginBottom: 10,
+                    padding: 8,
+                    width: "100%",
+                    borderRadius: 4,
+                    border: "1px solid #d1d5db",
+                  }}
+                />
+                <input
+                  name="password"
+                  type="password"
+                  value={loginForm.password}
+                  onChange={(e) =>
+                    setLoginForm({ ...loginForm, password: e.target.value })
+                  }
+                  placeholder="Password"
+                  required
+                  style={{
+                    display: "block",
+                    marginBottom: 10,
+                    padding: 8,
+                    width: "100%",
+                    borderRadius: 4,
+                    border: "1px solid #d1d5db",
+                  }}
+                />
+                <button
+                  type="submit"
+                  style={{
+                    padding: "8px 16px",
+                    fontWeight: 600,
+                    background: "#61dafb",
+                    border: "none",
+                    borderRadius: 4,
+                    cursor: "pointer",
+                    color: "#222",
+                  }}
+                >
+                  Login as Superuser
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    marginLeft: 8,
+                    padding: "6px 16px",
+                    background: "#e0e7ff",
+                    border: "none",
+                    borderRadius: 4,
+                    cursor: "pointer",
+                    color: "#222",
+                  }}
+                  onClick={() => setShowRegister(true)}
+                >
+                  Create Profile
+                </button>
+                {loginError && (
+                  <div style={{ color: "#991b1b", marginTop: 8 }}>{loginError}</div>
+                )}
+              </form>
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          <div
             style={{
-              display: "block",
-              marginBottom: 10,
-              padding: 8,
-              width: "100%",
-              borderRadius: 4,
-              border: "1px solid #d1d5db",
-            }}
-          />
-          <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-            placeholder="Project Description"
-            required
-            style={{
-              display: "block",
-              marginBottom: 10,
-              padding: 8,
-              width: "100%",
-              borderRadius: 4,
-              border: "1px solid #d1d5db",
-            }}
-          />
-          <select
-            name="status"
-            value={form.status}
-            onChange={handleChange}
-            style={{
-              display: "block",
-              marginBottom: 10,
-              padding: 8,
-              width: "100%",
-              borderRadius: 4,
-              border: "1px solid #d1d5db",
+              marginBottom: 12,
+              fontWeight: 600,
+              color: "#065f46",
             }}
           >
-            <option value="Available">Available</option>
-            <option value="Sold">Sold</option>
-          </select>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ display: "block", marginBottom: 10 }}
-          />
+            Logged in as: {superUser}
+          </div>
           <button
-            type="submit"
+            onClick={() => setSuperUser("")}
             style={{
+              marginBottom: 20,
+              padding: "6px 16px",
+              background: "#fee2e2",
+              border: "none",
+              borderRadius: 4,
+              cursor: "pointer",
+              color: "#991b1b",
+            }}
+          >
+            Logout
+          </button>
+          <button
+            style={{
+              marginBottom: 20,
               padding: "8px 16px",
               fontWeight: 600,
-              background: "#61dafb",
+              background: "#e0e7ff",
               border: "none",
               borderRadius: 4,
               cursor: "pointer",
               color: "#222",
             }}
+            onClick={() => setShowForm(!showForm)}
           >
-            Post Project
+            {showForm ? "Cancel" : "Add New Project"}
           </button>
-        </form>
+          {showForm && (
+            <form onSubmit={handleSubmit} style={{ marginBottom: 24 }}>
+              <input
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+                placeholder="Project Title"
+                required
+                style={{
+                  display: "block",
+                  marginBottom: 10,
+                  padding: 8,
+                  width: "100%",
+                  borderRadius: 4,
+                  border: "1px solid #d1d5db",
+                }}
+              />
+              <textarea
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+                placeholder="Project Description"
+                required
+                style={{
+                  display: "block",
+                  marginBottom: 10,
+                  padding: 8,
+                  width: "100%",
+                  borderRadius: 4,
+                  border: "1px solid #d1d5db",
+                }}
+              />
+              <select
+                name="status"
+                value={form.status}
+                onChange={handleChange}
+                style={{
+                  display: "block",
+                  marginBottom: 10,
+                  padding: 8,
+                  width: "100%",
+                  borderRadius: 4,
+                  border: "1px solid #d1d5db",
+                }}
+              >
+                <option value="Available">Available</option>
+                <option value="Sold">Sold</option>
+              </select>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                style={{ display: "block", marginBottom: 10 }}
+              />
+              <button
+                type="submit"
+                style={{
+                  padding: "8px 16px",
+                  fontWeight: 600,
+                  background: "#61dafb",
+                  border: "none",
+                  borderRadius: 4,
+                  cursor: "pointer",
+                  color: "#222",
+                }}
+              >
+                Post Project
+              </button>
+            </form>
+          )}
+        </>
       )}
       <div
         style={{
@@ -309,7 +409,7 @@ function Projects() {
         {projects.length === 0 ? (
           <p>No projects posted yet.</p>
         ) : (
-          projects.map((project) => (
+          projects.map((project: Project) => (
             <div
               key={project.id}
               style={{

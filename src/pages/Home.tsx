@@ -1,7 +1,23 @@
-import React from "react";
-import { initialProjects } from "./Projects";
+import React, { useState, useEffect } from "react";
+
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+  image: string;
+};
 
 function Home() {
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/projects")
+      .then((res) => res.json())
+      .then((data) => setFeaturedProjects(data.slice(0, 3)))
+      .catch((err) => console.error("Failed to fetch projects:", err));
+  }, []);
+
   return (
     <div>
       <div
@@ -91,7 +107,7 @@ function Home() {
             marginBottom: 24,
           }}
         >
-          {initialProjects.slice(0, 3).map((project) => (
+          {featuredProjects.map((project: Project) => (
             <div
               key={project.id}
               style={{
