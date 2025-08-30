@@ -44,6 +44,119 @@ function About() {
         progress and to ensure that our project keeps on schedule and within
         budget.
       </p>
+      <h3
+        style={{
+          color: "#222",
+          marginTop: 32,
+          marginBottom: 12,
+          fontWeight: 700,
+        }}
+      >
+        Our Expertise: A Foundation of Strength
+      </h3>
+      <ul
+        style={{
+          fontSize: "1.08rem",
+          color: "#222",
+          lineHeight: 1.7,
+          marginBottom: 18,
+          paddingLeft: 18,
+        }}
+      >
+        <li>
+          <strong>Diverse Project Capabilities.</strong> We specialize in a wide
+          range of construction projects, including residential and commercial
+          development. Our adaptability allows us to tackle projects of varying
+          scales and complexities with confidence.
+        </li>
+        <li>
+          <strong>Technological Innovation.</strong> We embrace cutting edge
+          technologies and methodologies to enhance efficiency, accuracy and
+          sustainability in our projects. From BIM modelling to advanced
+          construction management software, we leverage the latest tools to
+          deliver superior outcomes.
+        </li>
+        <li>
+          <strong>Expert Craftsmanship.</strong> Our team of highly skilled
+          professionals brings years of experience and expertise to every
+          project. From architects and engineers to project managers and skilled
+          labourers we have the talent and knowledge to deliver exceptional
+          results.
+        </li>
+        <li>
+          <strong>Commitment to Safety.</strong> Safety is our top priority. We
+          maintain strict adherence to industry standards and best practices,
+          ensuring a secure working environment for our team and the public. We
+          are committed to minimizing risks and promoting a culture of safety on
+          every project.
+        </li>
+      </ul>
+      <h3
+        style={{
+          color: "#222",
+          marginTop: 32,
+          marginBottom: 12,
+          fontWeight: 700,
+        }}
+      >
+        Our Vision
+      </h3>
+      <p
+        style={{
+          fontSize: "1.08rem",
+          color: "#222",
+          lineHeight: 1.7,
+          marginBottom: 18,
+        }}
+      >
+        A regional market leader in the provision of civil engineering and
+        building construction services.
+      </p>
+      <h3
+        style={{
+          color: "#222",
+          marginTop: 32,
+          marginBottom: 12,
+          fontWeight: 700,
+        }}
+      >
+        Our Mission
+      </h3>
+      <p
+        style={{
+          fontSize: "1.08rem",
+          color: "#222",
+          lineHeight: 1.7,
+          marginBottom: 18,
+        }}
+      >
+        We aim to be a world-class engineering construction company, providing
+        efficient, affordable, sustainable, and cost-effective services of the
+        highest quality.
+      </p>
+      <h3
+        style={{
+          color: "#222",
+          marginTop: 32,
+          marginBottom: 12,
+          fontWeight: 700,
+        }}
+      >
+        Our Values
+      </h3>
+      <p
+        style={{
+          fontSize: "1.08rem",
+          color: "#222",
+          lineHeight: 1.7,
+          marginBottom: 18,
+        }}
+      >
+        We maintain the highest standards of professionalism and integrity,
+        fostering creativity and a positive attitude. Our goal is to deliver
+        solutions that not only meet but exceed expectations, providing prompt
+        and lasting results that stand the test of time.
+      </p>
     </div>
   );
 }

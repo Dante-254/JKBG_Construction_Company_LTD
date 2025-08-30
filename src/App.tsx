@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Projects from "./pages/Projects";
 import "./App.css";
 
 function App() {
-  const [view, setView] = useState<"home" | "about">("home");
+  const [view, setView] = useState<"home" | "about" | "projects">("home");
 
   // Scroll to services section in Home page
   const handleServicesClick = () => {
@@ -21,8 +22,9 @@ function App() {
     <div>
       <header className="navbar">
         <nav className="navbar-nav">
-          <button className="navbar-btn" onClick={() => setView("home")}>
-            <button className="navbar-btn" onClick={() => {
+          <button
+            className="navbar-btn"
+            onClick={() => {
               setView("home");
               setTimeout(() => {
                 const landingSection = document.querySelector("h1");
@@ -30,10 +32,15 @@ function App() {
                   landingSection.scrollIntoView({ behavior: "smooth" });
                 }
               }, 100);
-            }}>Home</button>
+            }}
+          >
+            Home
           </button>
           <button className="navbar-btn" onClick={handleServicesClick}>
             Services
+          </button>
+          <button className="navbar-btn" onClick={() => setView("projects")}>
+            Projects
           </button>
           <button className="navbar-btn" onClick={() => setView("about")}>
             About
@@ -43,6 +50,7 @@ function App() {
       <main style={{ paddingTop: 80 }}>
         {view === "home" && <Home />}
         {view === "about" && <About />}
+        {view === "projects" && <Projects />}
       </main>
     </div>
   );
