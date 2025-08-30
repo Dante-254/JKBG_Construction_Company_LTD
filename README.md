@@ -57,6 +57,82 @@ Then open [http://localhost:5000](http://localhost:5000) in your browser.
 
 For any issues, please contact the project maintainer.
 
+# JKBG Construction Company Ltd
+
+## Setup Instructions
+
+### 1. MySQL Database
+- Create the database and tables:
+  ```sql
+  CREATE DATABASE IF NOT EXISTS jkbgccl;
+  USE jkbgccl;
+  CREATE TABLE IF NOT EXISTS projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    status ENUM('Available', 'Sold') NOT NULL DEFAULT 'Available',
+    image TEXT
+  );
+  CREATE TABLE IF NOT EXISTS superusers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+  );
+  ```
+- Seed initial projects:
+  ```sh
+  mysql -u manoti -p jkbgccl < server/seed-projects.sql
+  ```
+
+### 2. MySQL User Setup
+- Ensure user `manoti` exists and has privileges:
+  ```sql
+  ALTER USER 'manoti'@'localhost' IDENTIFIED BY 'your_actual_password';
+  GRANT ALL PRIVILEGES ON jkbgccl.* TO 'manoti'@'localhost';
+  FLUSH PRIVILEGES;
+  ```
+- Update `/server/index.js` with:
+  ```js
+  const db = await mysql.createPool({
+    host: "localhost",
+    user: "manoti",
+    password: "your_actual_password",
+    database: "jkbgccl",
+  });
+  ```
+
+### 3. Backend Setup
+- Install dependencies:
+  ```sh
+  cd server
+  npm install
+  ```
+- Start backend:
+  ```sh
+  npm start
+  ```
+- Backend runs on `http://localhost:4000`
+
+### 4. Frontend Setup
+- Start frontend (Vite/React):
+  ```sh
+  npm install
+  npm run dev
+  ```
+- Frontend fetches projects from `http://localhost:4000/api/projects`
+
+### 5. Troubleshooting
+- If you see `Access denied for user 'manoti'@'localhost'`, check your MySQL password and privileges.
+- If projects are not visible, ensure backend is running and database is seeded.
+- For CORS/network issues, check browser console and backend logs.
+
+---
+
+## Features
+- Customers can view all projects without logging in.
+- Only authenticated superusers can add/edit projects.
+- Superusers can register and log in from the Projects page.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
