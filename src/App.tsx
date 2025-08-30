@@ -22,7 +22,15 @@ function App() {
       <header className="navbar">
         <nav className="navbar-nav">
           <button className="navbar-btn" onClick={() => setView("home")}>
-            Home
+            <button className="navbar-btn" onClick={() => {
+              setView("home");
+              setTimeout(() => {
+                const landingSection = document.querySelector("h1");
+                if (landingSection) {
+                  landingSection.scrollIntoView({ behavior: "smooth" });
+                }
+              }, 100);
+            }}>Home</button>
           </button>
           <button className="navbar-btn" onClick={handleServicesClick}>
             Services

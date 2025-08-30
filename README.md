@@ -13,27 +13,24 @@ This is a React-based website for JKBG Construction Company Ltd.
 
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
-   cd jkbgccl
+   git clone https://github.com/Dante-254/JKBG_Construction_Company_LTD.git
+   cd JKBG_Construction_Company_LTD
    ```
 2. Install dependencies:
+   Open a terminal in the project folder and run:
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
-### Running the Development Server
+### Running the App (Development Mode)
 
 Start the app locally:
 
 ```bash
 npm start
-# or
-yarn start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+This will open the app in your browser at [http://localhost:3000](http://localhost:3000).
 
 ### Building for Production
 
@@ -41,22 +38,20 @@ To create an optimized production build:
 
 ```bash
 npm run build
-# or
-yarn build
 ```
 
 The build output will be in the `build` directory.
 
 ### Previewing the Production Build
 
-You can preview the production build locally using a simple server:
+To preview the production build locally:
 
 ```bash
 npm install -g serve
 serve -s build
 ```
 
-Then open [http://localhost:5000](http://localhost:5000).
+Then open [http://localhost:5000](http://localhost:5000) in your browser.
 
 ---
 
