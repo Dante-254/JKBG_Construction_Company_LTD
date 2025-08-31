@@ -62,6 +62,7 @@ For any issues, please contact the project maintainer.
 ## Setup Instructions
 
 ### 1. MySQL Database
+
 - Create the database and tables:
   ```sql
   CREATE DATABASE IF NOT EXISTS jkbgccl;
@@ -85,6 +86,7 @@ For any issues, please contact the project maintainer.
   ```
 
 ### 2. MySQL User Setup
+
 - Ensure user `manoti` exists and has privileges:
   ```sql
   ALTER USER 'manoti'@'localhost' IDENTIFIED BY 'your_actual_password';
@@ -102,6 +104,7 @@ For any issues, please contact the project maintainer.
   ```
 
 ### 3. Backend Setup
+
 - Install dependencies:
   ```sh
   cd server
@@ -114,6 +117,7 @@ For any issues, please contact the project maintainer.
 - Backend runs on `http://localhost:4000`
 
 ### 4. Frontend Setup
+
 - Start frontend (Vite/React):
   ```sh
   npm install
@@ -122,6 +126,7 @@ For any issues, please contact the project maintainer.
 - Frontend fetches projects from `http://localhost:4000/api/projects`
 
 ### 5. Troubleshooting
+
 - If you see `Access denied for user 'manoti'@'localhost'`, check your MySQL password and privileges.
 - If projects are not visible, ensure backend is running and database is seeded.
 - For CORS/network issues, check browser console and backend logs.
@@ -129,6 +134,7 @@ For any issues, please contact the project maintainer.
 ---
 
 ## Features
+
 - Customers can view all projects without logging in.
 - Only authenticated superusers can add/edit projects.
 - Superusers can register and log in from the Projects page.

@@ -8,11 +8,11 @@ type Project = {
   image: string;
 };
 
-type ProjectsProps = {
-  isOwner?: boolean;
-};
+// type ProjectsProps = {
+//   isOwner?: boolean;
+// };
 
-function Projects({ isOwner = false }: ProjectsProps) {
+function Projects(/*{ isOwner = false }: ProjectsProps*/) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [form, setForm] = useState({
     title: "",
@@ -24,7 +24,8 @@ function Projects({ isOwner = false }: ProjectsProps) {
   const [superUser, setSuperUser] = useState<string>("");
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState("");
-  const [showRegister, setShowRegister] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [registerForm, setRegisterForm] = useState({
     username: "",
     password: "",
@@ -65,7 +66,7 @@ function Projects({ isOwner = false }: ProjectsProps) {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoginError("");
-    const res = await fetch("/api/superusers/login", {
+    const res = await fetch("http://localhost:4000/api/superusers/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginForm),
@@ -74,6 +75,7 @@ function Projects({ isOwner = false }: ProjectsProps) {
     if (data.success) {
       setSuperUser(loginForm.username);
       setLoginForm({ username: "", password: "" });
+      setShowLoginModal(false);
     } else {
       setLoginError(data.error || "Login failed");
     }
@@ -84,7 +86,7 @@ function Projects({ isOwner = false }: ProjectsProps) {
     e.preventDefault();
     setRegisterError("");
     setRegisterSuccess("");
-    const res = await fetch("/api/superusers", {
+    const res = await fetch("http://localhost:4000/api/superusers", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registerForm),
@@ -96,13 +98,15 @@ function Projects({ isOwner = false }: ProjectsProps) {
     } else {
       setRegisterError(data.error || "Registration failed");
     }
+    console.log("Submitting:", registerForm);
+
   };
 
   // Add project (only if superUser is set)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!superUser) return;
-    const res = await fetch("/api/projects", {
+    const res = await fetch("http://localhost:4000/api/projects", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...form, username: superUser }),
@@ -130,92 +134,67 @@ function Projects({ isOwner = false }: ProjectsProps) {
       </h2>
       {!superUser ? (
         <>
-          {showRegister ? (
-            <form onSubmit={handleRegister} style={{ marginBottom: 24 }}>
-              <input
-                name="username"
-                value={registerForm.username}
-                onChange={(e) =>
-                  setRegisterForm({
-                    ...registerForm,
-                    username: e.target.value,
-                  })
-                }
-                placeholder="Choose a username"
-                required
+          <button
+            style={{
+              marginBottom: 20,
+              padding: "8px 16px",
+              fontWeight: 600,
+              background: "#e0e7ff",
+              border: "none",
+              borderRadius: 4,
+              cursor: "pointer",
+              color: "#222",
+            }}
+            onClick={() => setShowLoginModal(true)}
+          >
+            Login as Superuser
+          </button>
+          <button
+            style={{
+              marginBottom: 20,
+              padding: "8px 16px",
+              fontWeight: 600,
+              background: "#d1fae5",
+              border: "none",
+              borderRadius: 4,
+              cursor: "pointer",
+              color: "#065f46",
+            }}
+            onClick={() => setShowRegisterModal(true)}
+          >
+            Create Superuser Profile
+          </button>
+          {showLoginModal && (
+            <div
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                background: "rgba(0,0,0,0.15)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 1000,
+              }}
+            >
+              <form
+                onSubmit={handleLogin}
                 style={{
-                  display: "block",
-                  marginBottom: 10,
-                  padding: 8,
-                  width: "100%",
-                  borderRadius: 4,
-                  border: "1px solid #d1d5db",
-                }}
-              />
-              <input
-                name="password"
-                type="password"
-                value={registerForm.password}
-                onChange={(e) =>
-                  setRegisterForm({
-                    ...registerForm,
-                    password: e.target.value,
-                  })
-                }
-                placeholder="Choose a password"
-                required
-                style={{
-                  display: "block",
-                  marginBottom: 10,
-                  padding: 8,
-                  width: "100%",
-                  borderRadius: 4,
-                  border: "1px solid #d1d5db",
-                }}
-              />
-              <button
-                type="submit"
-                style={{
-                  padding: "8px 16px",
-                  fontWeight: 600,
-                  background: "#d1fae5",
-                  border: "none",
-                  borderRadius: 4,
-                  cursor: "pointer",
-                  color: "#065f46",
+                  background: "#fff",
+                  padding: 32,
+                  borderRadius: 12,
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.12)",
+                  minWidth: 320,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
                 }}
               >
-                Create Superuser Profile
-              </button>
-              <button
-                type="button"
-                style={{
-                  marginLeft: 8,
-                  padding: "6px 16px",
-                  background: "#e0e7ff",
-                  border: "none",
-                  borderRadius: 4,
-                  cursor: "pointer",
-                  color: "#222",
-                }}
-                onClick={() => setShowRegister(false)}
-              >
-                Cancel
-              </button>
-              {registerError && (
-                <div style={{ color: "#991b1b", marginTop: 8 }}>
-                  {registerError}
-                </div>
-              )}
-              {registerSuccess && (
-                <div style={{ color: "#065f46", marginTop: 8 }}>
-                  {registerSuccess}
-                </div>
-              )}
-            </form>
-          ) : (
-            <>
-              <form onSubmit={handleLogin} style={{ marginBottom: 24 }}>
+                <h3 style={{ marginBottom: 18, color: "#222" }}>
+                  Superuser Login
+                </h3>
                 <input
                   name="username"
                   value={loginForm.username}
@@ -261,9 +240,118 @@ function Projects({ isOwner = false }: ProjectsProps) {
                     borderRadius: 4,
                     cursor: "pointer",
                     color: "#222",
+                    marginBottom: 8,
                   }}
                 >
-                  Login as Superuser
+                  Login
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    padding: "6px 16px",
+                    background: "#e0e7ff",
+                    border: "none",
+                    borderRadius: 4,
+                    cursor: "pointer",
+                    color: "#222",
+                  }}
+                  onClick={() => setShowLoginModal(false)}
+                >
+                  Cancel
+                </button>
+                {loginError && (
+                  <div style={{ color: "#991b1b", marginTop: 8 }}>
+                    {loginError}
+                  </div>
+                )}
+              </form>
+            </div>
+          )}
+          {showRegisterModal && (
+            <div
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                background: "rgba(0,0,0,0.15)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 1000,
+              }}
+            >
+              <form
+                onSubmit={handleRegister}
+                style={{
+                  background: "#fff",
+                  padding: 32,
+                  borderRadius: 12,
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.12)",
+                  minWidth: 320,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <h3 style={{ marginBottom: 18, color: "#222" }}>
+                  Create Superuser Profile
+                </h3>
+                <input
+                  name="username"
+                  value={registerForm.username}
+                  onChange={(e) =>
+                    setRegisterForm({
+                      ...registerForm,
+                      username: e.target.value,
+                    })
+                  }
+                  placeholder="Choose a username"
+                  required
+                  style={{
+                    display: "block",
+                    marginBottom: 10,
+                    padding: 8,
+                    width: "100%",
+                    borderRadius: 4,
+                    border: "1px solid #d1d5db",
+                  }}
+                />
+                <input
+                  name="password"
+                  type="password"
+                  value={registerForm.password}
+                  onChange={(e) =>
+                    setRegisterForm({
+                      ...registerForm,
+                      password: e.target.value,
+                    })
+                  }
+                  placeholder="Choose a password"
+                  required
+                  style={{
+                    display: "block",
+                    marginBottom: 10,
+                    padding: 8,
+                    width: "100%",
+                    borderRadius: 4,
+                    border: "1px solid #d1d5db",
+                  }}
+                />
+                <button
+                  type="submit"
+                  style={{
+                    padding: "8px 16px",
+                    fontWeight: 600,
+                    background: "#d1fae5",
+                    border: "none",
+                    borderRadius: 4,
+                    cursor: "pointer",
+                    color: "#065f46",
+                  }}
+                >
+                  Create Superuser Profile
                 </button>
                 <button
                   type="button"
@@ -276,15 +364,22 @@ function Projects({ isOwner = false }: ProjectsProps) {
                     cursor: "pointer",
                     color: "#222",
                   }}
-                  onClick={() => setShowRegister(true)}
+                  onClick={() => setShowRegisterModal(false)}
                 >
-                  Create Profile
+                  Cancel
                 </button>
-                {loginError && (
-                  <div style={{ color: "#991b1b", marginTop: 8 }}>{loginError}</div>
+                {registerError && (
+                  <div style={{ color: "#991b1b", marginTop: 8 }}>
+                    {registerError}
+                  </div>
+                )}
+                {registerSuccess && (
+                  <div style={{ color: "#065f46", marginTop: 8 }}>
+                    {registerSuccess}
+                  </div>
                 )}
               </form>
-            </>
+            </div>
           )}
         </>
       ) : (

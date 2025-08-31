@@ -8,7 +8,7 @@ app.use(express.json());
 
 const db = await mysql.createPool({
   host: "localhost",
-  user: "Manoti",
+  user: "manoti",
   password: "your_password",
   database: "jkbgccl",
 });

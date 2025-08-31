@@ -334,7 +334,7 @@ function App() {
         )}
         {view === "home" && <Home />}
         {view === "about" && <About />}
-        {view === "projects" && <Projects isOwner={isOwner} />}
+        {view === "projects" && <Projects /*isOwner={isOwner}*/ />}
       </main>
     </div>
   );
